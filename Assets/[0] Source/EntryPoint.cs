@@ -9,6 +9,7 @@ public class EntryPoint : MonoBehaviour
    private void Start()
    {
       YandexSDK.Instance.Initialize();
+      YandexSDK.Instance.Console.Log("Initialized SDK");
       StartCoroutine(InitializeServices(LoadMainScene));
    }
 
@@ -16,6 +17,8 @@ public class EntryPoint : MonoBehaviour
    {
       yield return YandexSDK.Instance.EnvironmentService.LoadEnvironmentData();
       yield return YandexSDK.Instance.ProgressService.LoadProgress();
+      YandexSDK.Instance.Console.Log("Initialize Services");
+      callback?.Invoke();
    }
 
    private void LoadMainScene() =>
