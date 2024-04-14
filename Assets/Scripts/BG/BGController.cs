@@ -18,13 +18,6 @@ public class BGController : MonoBehaviour
         {
             btnShowVideo.gameObject.SetActive(false);
             btnUse.gameObject.SetActive(true);
-
-            if (index == GameController.Instance.indexBG)
-            {
-                txtUse.text = "Used";
-            }
-            else
-                txtUse.text = "Use";
         }
         else
         {
@@ -65,7 +58,6 @@ public class BGController : MonoBehaviour
 
     public void OnlickSetBGIndex()
     {
-        GameController.Instance.indexBG = indexBGSelect;
         SetUIBG(indexBGSelect);
         GameController.Instance.HomeScene.SetBG(indexBGSelect);
         Debug.Log("================123===============");

@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine.Events;
 
 namespace YaSDK.Source.SDK.Services.Interfaces
 {

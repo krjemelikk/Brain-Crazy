@@ -13,7 +13,7 @@ public class Level_13 : BaseLevel
     {
         base.Start();
         btOK.onClick.AddListener(() => CheckAnswer());
-        resultAnswer = 57;
+        resultAnswer = 21;
     }
 
     protected override void Update()

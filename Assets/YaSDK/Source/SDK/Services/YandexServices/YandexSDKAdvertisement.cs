@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.InteropServices;
+using UnityEngine.Events;
 using YaSDK.Source.SDK.Services.Interfaces;
 
 namespace YaSDK.Source.SDK.Services.YandexServices
@@ -32,7 +33,10 @@ namespace YaSDK.Source.SDK.Services.YandexServices
       public void HideAdBanner() =>
          HideAdBannerExtern();
 
-      private void OnRewardedAdShown() =>
+      private void OnRewardedAdShown()
+      {
          RewardedAdShown?.Invoke();
+         RewardedAdShown = null;
+      }
    }
 }

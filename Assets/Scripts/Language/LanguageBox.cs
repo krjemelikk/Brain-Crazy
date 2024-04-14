@@ -19,8 +19,11 @@ public class LanguageBox : BaseBox
     }
 
     private void Start() {
-        languagePanel.Init(flagDict,null,OnClickCloseButton);        
+        languagePanel.Init(flagDict,null,OnClickCloseButton, OnLanguagePanelInit);        
     }
+
+    private void OnLanguagePanelInit(LanguageItem item) =>
+        item.OnClickFlagButton();
 
     protected override void OnStart() {
         languagePanel.gameObject.SetActive(true);

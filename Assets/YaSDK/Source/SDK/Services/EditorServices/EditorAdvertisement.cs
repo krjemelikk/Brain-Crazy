@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.Events;
 using YaSDK.Source.SDK.Services.Interfaces;
 
 namespace YaSDK.Source.SDK.Services.EditorServices
@@ -12,6 +13,7 @@ namespace YaSDK.Source.SDK.Services.EditorServices
       {
          Debug.Log("<color=blue>Advertisement: </color>Rewarded ad shown");
          RewardedAdShown?.Invoke();
+         RewardedAdShown = null;
       }
 
       public void ShowInterstitialAd() =>

@@ -1,7 +1,10 @@
 ﻿using DG.Tweening;
 using System.Collections.Generic;
+using _0__Source;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class RewardIAPBox : BaseBox
 {
@@ -10,6 +13,7 @@ public class RewardIAPBox : BaseBox
 
     [SerializeField] protected Transform contentPool;
     [SerializeField] protected ElementReceverIAP rewardPrefab;
+    [SerializeField] private Button _button;
 
     protected List<ElementReceverIAP> rewardsPool;
 
@@ -34,8 +38,8 @@ public class RewardIAPBox : BaseBox
     {
         if (instance == null)
         {
-            // Create popup and attach it to UI
-            instance = Instantiate(Resources.Load(PathPrefabs.RECEVER_IAP) as GameObject);
+            // Create popup and attach it to UI;
+            instance = Instantiate(Resources.Load(PathPrefabs.RECEVER_IAP) as GameObject); 
         }
 
         instance.SetActive(true);

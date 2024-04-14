@@ -21,8 +21,6 @@ public class CongratulationPanel : BaseBox
     [SerializeField] private Text txtTips;
     [SerializeField] private Button btNextLevel;
     [SerializeField] private Button btWatchAds;
-    [SerializeField] private Button shareBtn;
-    [SerializeField] private Button shareNoHintBtn;
 
     [SerializeField] private GameObject[] humansObj;
 
@@ -62,33 +60,6 @@ public class CongratulationPanel : BaseBox
     protected override void OnStart()
     {
         base.OnStart();
-
-        if (RemoteConfigController.GetBoolConfig(StringHelper.ConfigFirebase.ON_OFF_SHARE_ADD_HINT, false) && TimeManager.CaculateTime(UnbiasedTime.Instance.Now, DataManager.TimeLastShareAddHint) >= DataManager.TimeDelayShareAddHint)
-        {
-            shareBtn.gameObject.SetActive(true);
-            shareNoHintBtn.gameObject.SetActive(false);
-            shareBtn.onClick.RemoveAllListeners();
-            shareBtn.onClick.AddListener(() =>
-            {
-                GameController.Instance.HomeScene.OnClickShare(() =>
-                {
-                    DataManager.AddHint(1);
-                    RewardIAPBox.Setup().ShowByWatchVideo(1);
-                    shareBtn.gameObject.SetActive(false);
-                    DataManager.TimeLastShareAddHint = UnbiasedTime.Instance.Now;
-                });
-            });
-        }
-        else
-        {
-            shareBtn.gameObject.SetActive(false);
-            shareNoHintBtn.gameObject.SetActive(true);
-            shareNoHintBtn.onClick.RemoveAllListeners();
-            shareNoHintBtn.onClick.AddListener(() =>
-            {
-                GameController.Instance.HomeScene.OnClickShare(() => { Debug.Log("Share Success"); });
-            });
-        }
 
         int randomHuman = Random.Range(0, humansObj.Length);
         for (int i = 0; i < humansObj.Length; i++)
@@ -193,9 +164,11 @@ public class CongratulationPanel : BaseBox
             rewardBtn.onClick.RemoveAllListeners();
             rewardBtn.onClick.AddListener(() =>
             {
+                Debug.Log("AddListener");
                 GameController.Instance.rewardAccumulate.ClaimReward(
                     () =>
                     {
+                        Debug.Log("ClaimReward");
                         GameController.Instance.rewardAccumulate.CurrentPercent = 0;
                         valuePercentReward_Txt.text = "0%";
                         valueBarPercentReward_Img.fillAmount = 0;
@@ -208,8 +181,6 @@ public class CongratulationPanel : BaseBox
 
                 if (rewardBardTween != null)
                     rewardBardTween.Kill();
-
-
             });
         }
         else

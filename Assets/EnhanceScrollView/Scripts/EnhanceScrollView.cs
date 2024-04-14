@@ -102,7 +102,6 @@ public class EnhanceScrollView : MonoBehaviour
 
     void Start()
     {
-        startCenterIndex = GameController.Instance.indexBG;
         bgController.indexBGSelect = startCenterIndex;
         bgController.SetUIBG(startCenterIndex);
         canChangeItem = true;

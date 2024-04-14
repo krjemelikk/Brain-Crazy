@@ -129,7 +129,11 @@ public class RewardLuckyBox : BaseBox
 
     private void OnClickWatchVideo()
     {
-        GameController.Instance.admobAds.ShowVideoReward(ActionReward, ActionNotLoad, ActionSkip, luckyPosition == LuckyPosition.EndGame ? ActionWatchVideo.LuckyReward_EndGame : ActionWatchVideo.LuckyReward_InGame);
+        GameController.Instance.admobAds.ShowVideoReward(
+            ActionReward, 
+            ActionNotLoad, 
+            ActionSkip, 
+            luckyPosition == LuckyPosition.EndGame ? ActionWatchVideo.LuckyReward_EndGame : ActionWatchVideo.LuckyReward_InGame);
     }
 
     private void ActionReward()

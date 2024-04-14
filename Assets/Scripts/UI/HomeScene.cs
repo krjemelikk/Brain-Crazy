@@ -59,8 +59,12 @@ public class HomeScene : BaseScenes
     {
         MusicManager.Instance.PlayBGMusic();
         this.RegisterListener(EventID.HINT_CHANGE, (sender) => UpdateUI());
-        if (languagePanel != null) languagePanel.Init(languageDict, ReloadFlag, () => { languagePanel.gameObject.SetActive(false); });
+        if (languagePanel != null) 
+            languagePanel.Init(languageDict, ReloadFlag, () => { languagePanel.gameObject.SetActive(false); }, OnLanguagePanelInit);
     }
+
+    private void OnLanguagePanelInit(LanguageItem item) =>
+        item.OnClickFlagButton();
 
     private void OnEnable()
     {
@@ -118,43 +122,17 @@ public class HomeScene : BaseScenes
     }
 
     #region === Settings ===
-    [SerializeField] private Button shareBtn;
     [SerializeField] private GameObject addHintShareObj;
     public void InitSetting()
     {
-        shareBtn.onClick.RemoveAllListeners();
 
         if (RemoteConfigController.GetBoolConfig(StringHelper.ConfigFirebase.ON_OFF_SHARE_ADD_HINT, false) && TimeManager.CaculateTime(UnbiasedTime.Instance.Now, DataManager.TimeLastShareAddHint) >= DataManager.TimeDelayShareAddHint)
         {
             addHintShareObj.SetActive(true);
-
-            shareBtn.gameObject.transform.DOKill();
-            shareBtn.gameObject.transform.localScale = Vector3.one;
-            shareBtn.gameObject.transform.DOScale(1.1f, 0.4f).SetLoops(-1, LoopType.Yoyo).SetUpdate(true);
-
-            shareBtn.onClick.AddListener(() =>
-            {
-                OnClickShare(() =>
-                {
-                    DataManager.AddHint(1);
-                    RewardIAPBox.Setup().ShowByWatchVideo(1);
-                    DataManager.TimeLastShareAddHint = UnbiasedTime.Instance.Now;
-                    addHintShareObj.SetActive(false);
-                    shareBtn.gameObject.transform.DOKill();
-                    shareBtn.gameObject.transform.localScale = Vector3.one;
-                });
-            });
         }
         else
         {
             addHintShareObj.SetActive(false);
-
-            shareBtn.gameObject.transform.DOKill();
-            shareBtn.gameObject.transform.localScale = Vector3.one;
-            shareBtn.onClick.AddListener(() =>
-            {
-                OnClickShare(null);
-            });
         }
     }
 
@@ -359,9 +337,9 @@ public class HomeScene : BaseScenes
 
     public void Rate()
     {
-        Debug.Log(StringHelper.StringColor("Show Rate", ColorString.yellow));
-        if (!DataManager.IsRated_5_Star)
-            RateBox.Setup().Show();
+        // Debug.Log(StringHelper.StringColor("Show Rate", ColorString.yellow));
+        // if (!DataManager.IsRated_5_Star)
+        //     RateBox.Setup().Show();
     }
 
     public void Share()

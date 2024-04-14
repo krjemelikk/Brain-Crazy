@@ -16,7 +16,7 @@ public class LanguageItem : MonoBehaviour
             languageText.text = GetLanguageText(_language.Value);
     }
 
-    public void Init(SystemLanguage language,Action<LanguageItem> clickAction)
+    public void Init(SystemLanguage language, Action<LanguageItem> clickAction)
     {
         _language = language; 
         _clickAction = clickAction;
