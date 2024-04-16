@@ -23,7 +23,7 @@ public class EntryPoint : MonoBehaviour
 
    private void LoadMainScene()
    {
-      YandexSDK.Instance.ProgressService.SetInt("HIGHEST_LEVEL_UNLOCKED", 150);
+      YandexSDK.Instance.ProgressService.SetInt("HIGHEST_LEVEL_UNLOCKED", 258);
       YandexSDK.Instance.AdvertisementService.ShowInterstitialAd();
       SceneManager.LoadScene("MainHome");
    }
